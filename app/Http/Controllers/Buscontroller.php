@@ -287,7 +287,7 @@ class Buscontroller extends Controller
         $startcoordinate=Station::where('sname','=',$start)->select(array('latitude','longitude'))->first();
         $endcoordinate=Station::where('sname','=',$end)->select(array('latitude','longitude'))->first();
         $curlSession = curl_init();
-        curl_setopt($curlSession, CURLOPT_URL, "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=$startcoordinate->latitude,$startcoordinate->longitude&destinations=$endcoordinate->latitude,$endcoordinate->longitude&travelMode=driving&key=AinSZboYsSxYCdeCUTAkARJXVn-4OvVOBMcYoX5nodydVGqFISesKBevGYUe99Vt");
+        curl_setopt($curlSession, CURLOPT_URL, "https://dev.virtualearth.net/REST/v1/Routes/DistanceMatrix?origins=$startcoordinate->latitude,$startcoordinate->longitude&destinations=$endcoordinate->latitude,$endcoordinate->longitude&travelMode=driving&key=[Your Key]");
         curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
         curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
         $jsonData = json_decode(curl_exec($curlSession));
