@@ -251,7 +251,7 @@ class BusHireManage extends Controller
         //return "true";
         BusHireRequest::Where('bhrid',$id)->delete();
         //session()->remove('acceptbushire');
-        session()->flash('deleted','Deleted Successfully');
+        session()->flash('deleted','Deleted Successfullys');
         return redirect()->route('bushiremanage');
     }
    
