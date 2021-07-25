@@ -23,7 +23,11 @@
                     <div class="form-group ">
                      Select Number : 
                       <select class="form-control text-center justify-content-center" aria-label="Default select example" name="bid">
-                        <option selected value="NULL">Select Bus</option>
+                     @if(session()->has('bid'))
+                        <option selected value="{{session()->get('bid')}}">{{session()->get('bnumber')}}</option>
+                   @else
+                   <option selected value="NULL">Select Bus</option>  
+                   @endif 
                         @foreach ($bus as $item)
                         <option value="{{$item->bid}}" >{{$item->number}}</option>      
                         @endforeach      
@@ -34,7 +38,11 @@
                     <div class="form-group">
                      Select Number :
                       <select class="form-control" aria-label="Default select example" name="did" >
-                        <option selected value="NULL">Select Driver</option>
+                       @if(session()->has('did'))
+                       <option selected value="{{session()->get('did')}}">{{session()->get('dname')}}</option>
+                       @else
+                       <option selected value="NULL">Select Driver</option>
+                       @endif
                         @foreach ($driver as $item)
                         <option value="{{$item->did}}" >{{$item->name}}</option>      
                         @endforeach      

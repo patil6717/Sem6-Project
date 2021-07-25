@@ -27,7 +27,7 @@
                                         </datalist>
                                      </div>
                                 </div>
-                                <div id="next-button" class="button-row d-flex mt-4"><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                                <div id="next-button" class="button-row d-flex mt-4"><button class="btn btn btn-black ml-auto js-btn-next" type="button" title="Next">Next</button></div>
                             </div>
                         </div>
                         <div id="single-form-next-prev" id="todata" class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
@@ -46,10 +46,10 @@
                                   <input class=" column col-md-2 form-control" style="margin-left: 20px; " type="text" placeholder="Station Order" name="sorder[]">
                                    <input class="column col-md-6  form-control "  style="margin-left: 20px; margin-top : 10px; margin-bottom : 5px;"  type="text" placeholder="Time From Previous Station" name="tfromp[]">
                                    <input class="column  col-md-3 form-control "  style="margin-left: 20px; margin-top : 10px; padding-bottom : 5px;"  type="text" placeholder="Hault Time" name="delay[]">
-                                    <button class="button-row d-flex btn btn btn-primary add_field_button "  style="margin-left: 20px;"  id="adddata" type="button"><i class="tim-icons icon-simple-add"></i></button>
+                                    <button class="button-row d-flex btn btn btn-black add_field_button "  style="margin-left: 20px;"  id="adddata" type="button"><i class="tim-icons icon-simple-add"></i></button>
                                 </div>
                                 </div>
-                                <div id="next-prev-buttons" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                                <div id="next-prev-buttons" class="button-row d-flex mt-4"><button class="btn btn btn-black js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-black ml-auto js-btn-next" type="button" title="Next">Next</button></div>
                             </div>
                         </div>
                        
@@ -61,10 +61,10 @@
                                 <div class="row" >
             
                                  Time : <input class=" column col-md-2 form-control" style="margin-left: 20px; " type="time"  placeholder="Shedule Time" name="shedules[]">
-                                    <button class="button-row d-flex btn btn btn-primary add_field_button_shedules "  style="margin-left: 20px;"  id="adddata" type="button"><i class="tim-icons icon-simple-add"></i></button>
+                                    <button class="button-row d-flex btn btn btn-black add_field_button_shedules "  style="margin-left: 20px;"  id="adddata" type="button"><i class="tim-icons icon-simple-add"></i></button>
                                 </div>
                                 </div>
-                                <div id="next-prev-buttons" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-primary ml-auto js-btn-save" type="submit">Save</button></div>
+                                <div id="next-prev-buttons" class="button-row d-flex mt-4"><button class="btn btn btn-black js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-black ml-auto js-btn-save" type="submit">Save</button></div>
                             </div>
                         </div>
                     </form>
@@ -94,7 +94,7 @@
 		e.preventDefault();
 		if(x1 < max_fields1){ //max input box allowed
 			x++; //text box increment
-			$(wrapper1).append('<div class="row"><input class="column col-md-6 form-control"  style="margin-left: 20px;" value=""  list="fromstation"type="text" placeholder="Station Name" name="sname[]"><div> <datalist id="fromstation">@foreach($stations as $station)<option value="{{$station->sname}}"></option>@endforeach</datalist></div> <input class=" column col-md-2 form-control" style="margin-left: 20px; " type="text" placeholder="Station Order" name="sorder[]">  <input class="column col-md-6  form-control "  style="margin-left: 20px; margin-top : 10px; margin-bottom : 5px;"  type="text" placeholder="Time From Previous Station" name="tfromp[]"><input class="column  col-md-3 form-control "  style="margin-left: 20px; margin-top : 10px; padding-bottom : 5px;"  type="text" placeholder="Hault Time" name="delay[]"><a href="#" class="remove_field"><button class="button-row d-flex btn btn btn-primary"  style="margin-left: 20px;"  type="button"><i class="tim-icons icon-simple-delete"></i></button></a></div>'); //add input box
+			$(wrapper1).append('<div class="row"><input class="column col-md-6 form-control"  style="margin-left: 20px;" value=""  list="fromstation"type="text" placeholder="Station Name" name="sname[]"><div> <datalist id="fromstation">@foreach($stations as $station)<option value="{{$station->sname}}"></option>@endforeach</datalist></div> <input class=" column col-md-2 form-control" style="margin-left: 20px; " type="text" placeholder="Station Order" name="sorder[]">  <input class="column col-md-6  form-control "  style="margin-left: 20px; margin-top : 10px; margin-bottom : 5px;"  type="text" placeholder="Time From Previous Station" name="tfromp[]"><input class="column  col-md-3 form-control "  style="margin-left: 20px; margin-top : 10px; padding-bottom : 5px;"  type="text" placeholder="Hault Time" name="delay[]"><a href="#" class="remove_field"><button class="button-row d-flex btn btn btn-black"  style="margin-left: 20px;"  type="button"><i class="tim-icons icon-simple-delete"></i></button></a></div>'); //add input box
 		}
 	});
 	
@@ -106,7 +106,7 @@
 		e.preventDefault();
 		if(x < max_fields){ //max input box allowed
 			x++; //text box increment
-			$(wrapper).append('<div class="row">Time : <input class=" column col-md-2 form-control" style="margin-left: 20px; " type="time"  placeholder="Shedule Time" name="shedules[]"><a href="#" class="remove_field"><button class="button-row d-flex btn btn btn-primary"  style="margin-left: 20px;"  type="button"><i class="tim-icons icon-simple-delete"></i></button></a></div></div>'); //add input box
+			$(wrapper).append('<div class="row">Time : <input class=" column col-md-2 form-control" style="margin-left: 20px; " type="time"  placeholder="Shedule Time" name="shedules[]"><a href="#" class="remove_field"><button class="button-row d-flex btn btn btn-black"  style="margin-left: 20px;"  type="button"><i class="tim-icons icon-simple-delete"></i></button></a></div></div>'); //add input box
 		}
 	});
 	

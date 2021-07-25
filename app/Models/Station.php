@@ -9,6 +9,7 @@ class Station extends Model
 {
     use HasFactory;
     protected $table = 'stations';
+    public $timestamps=false;
 
 
     protected $fillable = [

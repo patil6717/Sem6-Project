@@ -112,26 +112,11 @@
                   </div>
                   </div>
                   @endforeach
-                <div class="row">
-                  <div class="col-md-2 pr-md-1">
-                    <div class="form-group">
-                      <label>Total Kilometer : </label>
-                      <input type="text" class="form-control" name="distance" placeholder="City" value="{{session()->get('distance')}}" readonly>
-                    </div>
-                  </div>
-              
-                  <div class="col-md-4 pr-md-1">
-                    <div class="form-group">
-                      <label>Total Amount : </label>
-                      <input type="text" class="form-control" name="total" placeholder="City" value="{{session()->get('finalamount')}}" readonly>
-                    </div>
-                  </div>
                
-                </div>
                 <form class="justify-content-center" action="{{route('bushiremanage')}}" >
            
                 <div class="card-footer">
-                <button type="submit" class="btn btn-fill btn-primary">Go Back</button>
+                <button type="submit" class="btn btn-fill btn-black">Go Back</button>
                 </div>
               </form>
                 <form method="POST" action="{{route('deletebushire',$rdata->bhrid)}}">    <div class="card-footer">

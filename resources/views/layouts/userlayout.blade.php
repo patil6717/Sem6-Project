@@ -32,29 +32,15 @@
 @yield('content')
 <footer class="footer-dark" style="background-image:url('{{asset('/img/map-image.png')}}'); ">
     <div class="container" style="color:#ADD8E6">
-        <div class="row">
-            <div class="col-sm-6 col-md-3 item">
-                <h3 >List</h3>
-                <ul>
-                    <li style="opacity:100%"><a href="#">Stations</a></li>
-                    <li style="opacity:100%"><a href="#">Shedules</a></li>
-                    <li style="opacity:100%"><a href="#">Routes</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-6 col-md-3 item">
-                <h3>Details</h3>
-                <ul style="opacity:100%">
-                    <li><a href="#">About Us&nbsp;</a></li>
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-            </div>
-            <div class="col-md-6 item text" style="opacity:100%">
+        <div class="row justify-content-center">
+            <div class="col-md-6 item text-center" style="opacity:100%">
                 <h3>Om Sai Tours &amp; Travels Pvt. Ltd.</h3>
                 <p>67,Swagat Complex, Kadodara-394327, Tal:Palsana, Dist:Surat</p>
                 <p>Contact No:9727707949</p>
                 <p></p>
             </div>
+        </div>
+        <div class="row">
             <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
         </div>
         <p class="copyright" style="color: #F08080; opacity:100%">Om Sai Travel © 2021 <br>Made with Love By Yogesh patil</p>

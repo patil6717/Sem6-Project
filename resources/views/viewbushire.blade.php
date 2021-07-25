@@ -4,11 +4,10 @@
     <div class="container-fluid"><a class="navbar-brand" href="/"><i class="fa fa-globe"></i>&nbsp;Om Sai Travels</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ml-auto" style="background-color: #0d7994;">
-                <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="/">Trip</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('gettrip')}}">Trip</a></li>
                 <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('tour')}}">Tour</a></li>
-                <li class="nav-item"><a class="nav-link active" style="color:#fffff0;" href="{{route('getbushire')}}">Bus HIre</a></li>
-                <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('tour')}}">Shedules</a></li>
-            </ul>
+                <li class="nav-item"><a class="nav-link" style="color:#18e0e0;" href="{{route('getbushire')}}">Bus HIre</a></li>
+    </ul>
         </div>
     </div>
   </nav>
@@ -107,7 +106,7 @@
                     <tr>
                         <div class="column">
                             <td>
-                                <form action="{{route('deleterequestbushire')}}" method="post">
+                                <form action="{{route('deleterequestbushire')}}">
                                     @method('delete')
                                     @csrf
                                     <input type="text" name="id" value="{{$item->bhrid}}" hidden>
@@ -213,7 +212,7 @@
                     <tr>
                         <div class="column">
                             <td colspan="3">
-                                <form action="{{route('deleterequestbushire')}}" method="post">
+                                <form action="{{route('deleterequestbushire')}}">
                                     @method('delete')
                                     @csrf
                                     <input type="text" name="id" value="{{$item->bhrid}}" hidden>

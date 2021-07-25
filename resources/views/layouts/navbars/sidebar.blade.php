@@ -12,8 +12,8 @@
             </li>
             <li>
                 <a data-toggle="collapse" href="#trip" aria-expanded="false">
-                    <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Trip') }}</span>
+                    <img src="https://img.icons8.com/windows/24/ffffff/around-the-globe.png"/>
+                    <span class="nav-link-text" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ __('Trip') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
 
@@ -37,13 +37,20 @@
                                 <p>{{ _('Allocations') }}</p>
                             </a>
                         </li>
+                        <li @if ($pageSlug == 'station') class="active " @endif>
+                            <a href="{{ route('admin.station')  }}">
+                                <img src="https://img.icons8.com/ios/24/ffffff/bus-stop.png"/>&nbsp;&nbsp;&nbsp; &nbsp; {{ _('Station') }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
-            <li @if ($pageSlug == 'tour') class="active " @endif>
-                <a href="{{ route('pages.icons') }}">
-                    <i class="tim-icons icon-atom"></i>
-                    <p>{{ _('Tour') }}</p>
+          
+          
+          
+            <li @if ($pageSlug == 'tour') class="active bg-info " @endif>
+                <a href="{{ route('admin.tourmanage') }}">
+                    <img src="https://img.icons8.com/ios/24/ffffff/boarding-pass.png"/>&nbsp;&nbsp;&nbsp; {{ _('Tour') }}
                 </a>
             </li>
             <li @if ($pageSlug == 'bushire') class="active bg-info" @endif>
@@ -51,17 +58,33 @@
                     <i class="tim-icons icon-pin"></i>
                     <p>{{ _('Bus Hire') }}</p>
                 </a>
-            </li>
-            <li @if ($pageSlug == 'bus') class="active " @endif>
-                <a href="{{ route('pages.notifications') }}">
-                    <i class="tim-icons icon-bell-55"></i>
-                    <p>{{ _('Bus') }}</p>
+            </li> 
+            <li>
+                <a data-toggle="collapse" href="#bus" aria-expanded="false">
+                    <img src="https://img.icons8.com/ios/24/ffffff/bus.png"/>
+                    <span class="nav-link-text" >&nbsp;&nbsp;&nbsp;&nbsp;{{ __('Bus') }}</span>
+                    <b class="caret mt-1"></b>
                 </a>
+                <div class="collapse show" id="bus">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'allbus') class="active bg-info" @endif>
+                            <a href="{{ route('admin.buses')  }}">
+                                <img src="https://img.icons8.com/material-rounded/24/ffffff/show-all-views.png"/>&nbsp;&nbsp;&nbsp; {{ _('All Bus') }}           
+                            </a>
+                        </li>
+                        <li @if ($pageSlug == 'busmaintanance') class="active bg-info" @endif>
+                            <a href="{{ route('admin.busmaintanance')  }}">
+                                <img src="https://img.icons8.com/ios/24/ffffff/maintenance.png"/>&nbsp;&nbsp;&nbsp; {{ _('In Maintanance') }}                
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
-            <li @if ($pageSlug == 'driver') class="active " @endif>
-                <a href="{{ route('pages.tables') }}">
-                    <i class="tim-icons icon-puzzle-10"></i>
-                    <p>{{ _('Driver') }}</p>
+           
+            
+            <li @if ($pageSlug == 'alldriver') class="active bg-info" @endif>
+                <a href="{{ route('admin.drivers') }}">
+                    <img src="https://img.icons8.com/ios/24/ffffff/user.png"/>{{ _('Driver') }}
                 </a>
             </li>
             <li @if ($pageSlug == '') class="active " @endif>

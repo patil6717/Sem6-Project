@@ -184,6 +184,12 @@ class TripController extends Controller
         return $pdf->download('trippdf.pdf');
        // return view('trippdf',array('data'=>$data1));
     }
+    public function logout(){
+       // $this->guard()->logout();
+        session()->remove('authority');
+        return redirect()->route('home');
+    }
+
     public function otpviewbooking(Request $r)
     {
       //  return $r->email;
@@ -207,6 +213,7 @@ class TripController extends Controller
         $timedata=TicketBooking::where('email',$email)->get()->groupBy('time');
         foreach ($timedata as  $key=>$value) {
            $data=TicketBooking::where('email',$email)->where('time',$key)->get(['baid','time'])->first();
+          // echo $data;
            $sdate=Busallocation::where('baid',$data->baid)->get(['startdate'])->first();
            $busid=Busallocation::where('baid',$data->baid)->get('bid')->first();
            $busnumber=Bus::where('bid',$busid->bid)->get('number')->first();
@@ -216,6 +223,7 @@ class TripController extends Controller
             }
            
         }
+        //return "hello";
         //$datedata=Busallocation::whereIn('baid',$baid)->get('date');
         //return $timedata;
         return view('viewtrip',['data'=>$timedata]);

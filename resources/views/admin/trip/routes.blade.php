@@ -37,7 +37,7 @@
               <div class="card-body"> 
               
               @csrf
-              <div class="table-responsive">
+              <div class="">
                 <table class="table">
                 <tr><td colspan="4" ><button type="button" class="btn btn-black" ><a href="{{route('addroute')}}">Add</a> </button></td></tr>
                   <tr>

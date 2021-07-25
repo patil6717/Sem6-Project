@@ -130,7 +130,7 @@ class BusHIreController extends Controller
     }
     function deletebushire(Request $r)
     {
-        BusHireRequest::where('bhrid',$r->id)->where('email',$r->email);
-        return redirect()->route('otpbushirebooking');
+        BusHireRequest::where('bhrid',$r->id)->where('email',$r->email)->delete();
+        return redirect()->route('viewotprequestbushire');
     }
 }

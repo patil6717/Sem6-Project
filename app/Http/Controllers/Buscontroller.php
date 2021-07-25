@@ -205,7 +205,6 @@ class Buscontroller extends Controller
                      }
                         
                     }
-                   
                     $shedule->seats=$seat;
                     $shedule->female=$female;
                     $shedule->available=$shedule->capacity-sizeof($seat)-sizeof($female);

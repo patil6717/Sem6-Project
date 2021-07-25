@@ -276,14 +276,14 @@ class TripManage extends Controller
                     }
                     $value->shedule=$tomorrowshedule;
             }
-         
+            //return $tommorowroute;
             return view('admin.trip.allocations')->with(['todaydata'=>$todayroute,'tomorrowdata'=>$tommorowroute]);
          }      
         else
         {
-             
             $date=$r->date;
             $date1 =date('Y-m-d', strtotime("+1 day", strtotime($r->date)));
+            
             session()->put('today',$date);
             session()->put('tomorrow',$date1);
             //return $date1;
@@ -340,6 +340,33 @@ class TripManage extends Controller
         }
         return view('admin.trip.allocations')->with(['data'=>$route]);
 }
+public function copydata($date)
+{
+    $arr=explode('-',$date);
+    $dt=Carbon::create($arr[0],$arr[1],$arr[2],0);
+    $datadate= $dt->subday(2)->format('Y-m-d');
+    $aheaddate=$dt->addday(3)->format('Y-m-d');
+    $allocationData=Busallocation::where('startdate',$datadate)->get();
+    //return $allocationData;
+    foreach ($allocationData as  $value) {
+        $ba= new Busallocation();
+        $ba->shid=$value->shid;
+        $ba->rid=$value->rid;
+        $ba->did=$value->did;
+        $ba->bid=$value->bid;
+        $ba->startdate=$date;
+        if($value->startdate!=$value->enddate)
+        {
+            $ba->enddate=$aheaddate;
+        }else
+        {
+            $ba->enddate=$aheaddate;
+        }
+        $ba->isOver=0;
+        $ba->save();
+    }
+    return redirect()->back();
+}
 public function deleteshedule($id)
 {
    // return $id;
@@ -349,11 +376,13 @@ public function deleteshedule($id)
     public function viewallocate(Request $r)
     {
         //return $r;
+        //return $r;
         $biddata=Busallocation::where('startdate',$r->date)->get('bid');
         $array=[];
         if(count($biddata)>0)
         {
             foreach ($biddata as  $value) {
+                if($value->bid!=null)
                 array_push($array,$value->bid);
             }
             $busdata=Bus::whereNotIn('bid',$array)->where('isAvailable',1)->get(['bid','number']);
@@ -362,14 +391,17 @@ public function deleteshedule($id)
         {
             $busdata=Bus::where('isAvailable',1)->get(['bid','number']);      
         }
-        $diddata=Busallocation::where('startdate',$r->date)->get('did');
+        $diddata=Busallocation::where('startdate',$r->date)->groupby('did')->get('did');
+       // return $diddata;
         $arr=[];
         if(count($diddata)>0)
         {
             foreach ($diddata as  $value) {
+                if($value->did!=null)
                 array_push($arr,$value->did);
             }
             $driverdata=Driver::whereNotIn('did',$arr)->where('isAvailable',1)->get(['did','name']);
+        //   /  return $driverdata;
         }
         else
         {
@@ -384,8 +416,22 @@ public function deleteshedule($id)
         {
             $enddate=$r->date;
         }
-      
-        return view('admin.trip.allocateroute')->with(['rid'=>$r->rid,'date'=>$r->date,'enddate'=>$enddate,'rid'=>$r->rid,'bus'=>$busdata,'driver'=>$driverdata,'starttime'=>$r->starttime,'endtime'=>$r->endtime]);
+         $busid=Busallocation::where('rid',$r->rid)->where('shid',$r->shid)->where('startdate',$r->date)->get('bid')->first();
+         $did=Busallocation::where('rid',$r->rid)->where('shid',$r->shid)->where('startdate',$r->date)->get('did')->first();
+          
+         if(!empty($did->did))
+            {
+                $driver=Driver::where('did',$did->did)->get('name')->first();
+               session()->put('did',$did->did);
+               session()->put('dname',$driver->name);
+            }
+            if(!empty($busid->bid))
+            {
+                $bus=Bus::where('bid',$busid->bid)->get('number')->first();
+                session()->put('bid',$busid->bid);;
+                session()->put('bnumber',$bus->number);;
+            }
+            return view('admin.trip.allocateroute')->with(['rid'=>$r->rid,'date'=>$r->date,'enddate'=>$enddate,'rid'=>$r->rid,'bus'=>$busdata,'driver'=>$driverdata,'starttime'=>$r->starttime,'endtime'=>$r->endtime]);
     }
     public function addroute()
     {
@@ -468,21 +514,85 @@ public function deleteshedule($id)
     {
        // return $r;
         $shid=Shedule::where('starttime',$r->starttime)->where('rid',$r->rid)->get('shid')->first();
-        $badata=Busallocation::where('shid',$shid->shid)->where('rid',$r->rid)->where('startdate',$r->startdate)->get('baid');
-        if(count($badata)>0)
+        if(session()->has('bid') || session()->has('did'))
         {
-           Busallocation::where('shid',$shid->shid)->where('rid',$r->rid)->where('startdate',$r->startdate)->delete();
+            if($r->bid == session()->get('bid'))
+            {
+                Busallocation::where('bid',$r->bid)->where('startdate',$r->startdate)->update([
+                    'did' => $r->did,
+                ]);
+                session()->remove('bid');
+            }
+            if($r->did == session()->get('did'))
+            {
+                Busallocation::where('did',$r->did)->where('startdate',$r->startdate)->update([
+                    'bid' => $r->bid,
+                ]);
+       
+            }
+            session()->remove('did');
         }
-        $ba= new Busallocation();
-        $ba->shid=$shid->shid;
-        $ba->rid=$r->rid;
-        $ba->startdate=$r->startdate;
-        $ba->enddate=$r->enddate;
-        $ba->bid=$r->bid;
-        $ba->did=$r->did;
-        $ba->isOver=0;
-        $ba->save();
+        else
+        {
+            //return "hellp";
+            $ba= new Busallocation();
+            $ba->shid=$shid->shid;
+            $ba->rid=$r->rid;
+            $ba->startdate=$r->startdate;
+            $ba->enddate=$r->enddate;
+            $ba->bid=$r->bid;
+            $ba->did=$r->did;
+            $ba->isOver=0;
+            $ba->save();
+        
+        }
         session()->flash('success','Your Changes Are Saved');
         return redirect()->route('admin.allocation');
+    }
+
+
+    public function getstation()
+    {
+        $data=Station::paginate(10);
+        return view('admin.station')->with('data',$data);
+    }
+
+    public function savestation(Request $r)
+    {
+      //  return $r;
+      $s= new Station();
+      $s->sname=$r->name;
+      $s->location=$r->location;
+      $s->latitude=$r->lat;
+      $s->longitude=$r->long;
+      $s->Save();
+      session()->flash('success','Station Added');
+      return redirect()->back();
+    }
+    public function editstation(Request $r)
+    {
+        Station::where('sid',$r->id)->update([
+            'latitude'=>$r->lat,
+            'longitude'=>$r->long,
+            'location'=>$r->location
+        ]);
+        session()->flash('success','Changes Saved');
+        return redirect()->back();
+    }
+    public function deletestation(Request $r)
+    {
+     
+       $data=Routemap::where('sid',$r->id)->get();
+       if($data->isEmpty())
+       {
+        Station::where('sid',$r->id)->delete();
+        session()->flash('deleted','Station Deleted');
+        return redirect()->back();
+       }
+       else
+       {
+        session()->flash('deleted','Cant Delete Station Because Is there In Route');
+        return redirect()->back();
+       }
     }
 }

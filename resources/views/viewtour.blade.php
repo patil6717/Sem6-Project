@@ -4,8 +4,8 @@
     <div class="container-fluid"><a class="navbar-brand" href="/"><i class="fa fa-globe"></i>&nbsp;Om Sai Travels</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ml-auto" style="background-color: #0d7994;">
-                <li class="nav-item"><a class="nav-link" style="color:#18e0e0;" href="#">Trip</a></li>
-                <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('tour')}}">Tour</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('gettrip')}}">Trip</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:#18e0e0;" href="{{route('tour')}}">Tour</a></li>
                 <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('getbushire')}}">Bus HIre</a></li>
    </ul>
         </div>
@@ -18,13 +18,7 @@
             </p>
 
         </div>
-        @if ($data->isEmpty())
-      
-           <div class="alert alert-danger justify-content-center text-center">No Ticket Found</div>
-
-            
-        @endif
-        @foreach ($data as $key=>$item)
+        @foreach ($data as $value)
         <table  class="table text-center" style="border: 2px solid black;">
             <div class="row justify-content-center">
                 <tr>
@@ -59,7 +53,6 @@
                     </div>
                 </tr>
             </div>
-        @foreach ($item as $value)
                 <div class="row">
                     <tr>
                     <div class="column">
@@ -85,7 +78,7 @@
                     </div>
                     </tr>
                 </div>
-            @endforeach
+
             <div class="row">
                 <tr>
                     <div class="column">
@@ -98,13 +91,13 @@
                         <td> <p></p></td>
                     </div>
                      <div class="column">
-                        <th > From </th>
+                        <th > Place </th>
                     </div>
                     <div>
                         <td> <p></p></td>
                     </div>
                     <div class="column">
-                        <th >To </th>
+                        <th >Starttime </th>
                     </div>
                    
                     
@@ -117,7 +110,7 @@
             <div class="row">
                 <tr>
                     <div class="column">
-                        <td> {{$item[0]->startdate}}</td>
+                        <td> {{$value->startdate}}</td>
                     </div>
                     <div>
                         <td> <p></p></td>
@@ -126,32 +119,34 @@
                         <td> <p></p></td>
                     </div>
                     <div class="column">
-                        <td > {{$item[0]->startstation}}</td>
+                        <td > {{$value->main}}</td>
                     </div>
-                 
+                    <div>
+                        <td> <p></p></td>
+                    </div>
+                    <div class="column">
+                        <td>{{$value->starttime}} </td>
+                    </div>
+                   
                    
                     <div>
-                        <td> <p></p></td>
+                        <td>{{$value->number}} </td>
                     </div>
-                    <div class="column">
-                        <td > {{$item[0]->endstation}}</td>
-                    </div>
-                    <div class="column">
-                        <td > {{$item[0]->number}}</td>
-                    </div>
-                </tr>
+                  </tr>
             </div>
             <div class="row">
                 <tr>
                    
                     <div class="column text-center">
                         <td>
-                            <form action="{{route('deletetripview')}}" method="post">
+                            <form action="{{route('deletetourview')}}" method="post">
                                 @method('delete')
                                 @csrf
-                                <input type="text" name="email" value="{{$item[0]->email}}" hidden>
-                                <input type="text" name="time" value="{{$item[0]->time}}" hidden>
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                                <input type="text" name="name" id="" value="{{$value->name}}" hidden>
+                                <input type="text" name="taid" id="" value="{{$value->taid}}" hidden>
+                           
+                                <input type="text" name="email" value="{{$value->email}}" hidden>
+                       <button class="btn btn-danger" type="submit">Delete</button>
                             </form>
                             
                         </td>
@@ -184,13 +179,14 @@
                     </div>
                     <div class="column text-center">
                         <td>
-                            <form action="{{route('printtripview')}}" method="post" target="_blank">
+                            <form action="{{route('printtourview')}}" method="post" target="_blank">
                                 @csrf
-                                
-                                <input type="text" name="email" value="{{$item[0]->email}}" hidden>
-                                <input type="text" name="time" value="{{$item[0]->time}}" hidden>
+                                <input type="text" name="taid" id="" value="{{$value->taid}}" hidden>
+                                <input type="text" name="email" value="{{$value->email}}" hidden>
+                                <input type="text" name="name" id="" value="{{$value->name}}" hidden>
                                 <button class="btn btn-info" type="submit">Print Ticket</button>
                             </form>
+                       
                         </td>
                     </div>
                     

@@ -4,10 +4,10 @@
     <div class="container-fluid"><a class="navbar-brand" href="/"><i class="fa fa-globe"></i>&nbsp;Om Sai Travels</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav ml-auto" style="background-color: #0d7994;">
-                <li class="nav-item"><a class="nav-link" style="color:#18e0e0;" href="#">Trip</a></li>
-                <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('tour')}}">Tour</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('gettrip')}}">Trip</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:#18e0e0;" href="#">Tour</a></li>
                 <li class="nav-item"><a class="nav-link" style="color:#fffff0;" href="{{route('getbushire')}}">Bus HIre</a></li>
-             </ul>
+                       </ul>
         </div>
     </div>
   </nav>
@@ -23,7 +23,7 @@
             </ul>
         </div>
     @endif
-        <form action="{{route('otpviewbooking')}}" method="post">
+        <form action="{{route('otpviewbookingtour')}}" method="post">
              @csrf
         <div class="row justify-content-center text-center">
             <div class="column col-md-4 px-md-1 "><label for="">Email Id: </label><input type="text" class="form-control" name="email" value="{{old('email')}}" placeholder="email"></div>
@@ -34,7 +34,7 @@
         </div>
         <br>
         </form>
-        <form action="{{route('viewtrip')}}" method="post">
+        <form action="{{route('viewtour')}}" method="post">
        @csrf
         <div class="row justify-content-center text-center">
             <div class="column col-md-2 px-md-1 "><label for="">OTP : </label><input type="text" class="form-control" name="otp" placeholder="xxxxxx"></div>     

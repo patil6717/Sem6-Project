@@ -39,7 +39,7 @@
               <h5 class="card-category">Start Time : {{$request->starttime}}</h5>
               <h5 class="card-category">End Date : {{$request->enddate}}</h5>
               <h5 class="card-category">End Time : {{$request->endtime}}</h5>
-              <button type="submit" class="btn btn-primary">View</button>
+              <button type="submit" class="btn btn-black">View</button>
             </div>
           </div>
         </form>
@@ -76,7 +76,7 @@
                       <h5 class="card-category">Start Time : {{$request->starttime}}</h5>
                       <h5 class="card-category">End Date : {{$request->enddate}}</h5>
                       <h5 class="card-category">End Time : {{$request->endtime}}</h5>
-                      <button type="submit" class="btn btn-primary">View</button>
+                      <button type="submit" class="btn btn-black">View</button>
                     </div>
                   </div>
                 </form>

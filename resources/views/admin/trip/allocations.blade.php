@@ -16,13 +16,13 @@
         <tr >
           <form action="{{route('admin.allocation')}}">
           <input type="text" name="date" value={{\Carbon\Carbon::now()->format('Y-m-d')}} hidden>
-          <td><button type="submit" class="btn btn-info btn-simple">Today-Tommorow</button></td>
+          <td><button type="submit" @if (\Carbon\Carbon::now()->format('Y-m-d') == session()->get('today'))  class="btn btn-info btn-active"@else class="btn btn-info btn-simple" @endif>Today-Tommorow</button></td>
         </form>
           @for ($i = 0; $i < 30; $i++)
           <form action="{{route('admin.allocation')}}" method="get">
             
           <input type="text" name="date" value={{\Carbon\Carbon::now()->add($i+1,'day')->format('Y-m-d')}} hidden>
-          <td style="width: 100px" class=" col-6 col-md-6"><button type="submit" class="btn btn-info btn-simple">{{\Carbon\Carbon::now()->add($i+1,'day')->format('d/m')}}-{{\Carbon\Carbon::now()->add($i+2,'day')->format('d/m')}}</button></td>        
+          <td style="width: 100px" class=" col-6 col-md-6"><button type="submit" @if (\Carbon\Carbon::now()->add($i+1,'day')->format('Y-m-d') == session()->get('today'))  class="btn btn-info btn-active"@else  class="btn btn-info btn-simple" @endif>{{\Carbon\Carbon::now()->add($i+1,'day')->format('d/m')}}-{{\Carbon\Carbon::now()->add($i+2,'day')->format('d/m')}}</button></td>        
             </form>
           @endfor
         </tr>
@@ -31,12 +31,21 @@
     </div>
     <div class="col-12 col-md-12">
       <div class="card">
+
           <div class="card-header text-center">
-           {{session()->get('today')}} 
+          {{session()->get('today')}} 
           </div>
           <div class="card-body">
             
                 <table class="table ">
+                 
+                    @if (session()->get('today')!=\Carbon\Carbon::now()->format('Y-m-d'))
+                    <form action="{{route('admin.copydata',session()->get('today'))}}">
+                    <tr>
+                      <td colspan="7" class="justify-content-center text-center"><button type="submit" class="btn btn-black">Copy Data From PRevious Record</button></td>
+                  </tr>
+                </form>
+                  @endif
                   <tr><td>From</td>
                     <td>To</td>
                     <td>Starttime</td>
@@ -53,30 +62,35 @@
                             <td>{{$in->endtime}}</td>
                             <form action="{{route('viewallocate')}}" method="get">
                             @if(empty($in->busallocation))
-                            <td>Not Assigned</td>
-                            <td>Not Assigned</td>
-                                <td>
-                                  <input type="text" name="date" value="{{session()->get('today')}}" hidden>
-                                  <input type="text" name="rid" value="{{$item->rid}}" hidden>
-                                  <input type="text" name="starttime" value="{{$in->starttime}}" hidden>
-                                  <input type="text" name="endtime" value="{{$in->endtime}}" hidden>
-                                
-                                  <button type="submit" rel="tooltip" class="btn btn-success btn-sm btn-icon">
-                                  <i class="tim-icons icon-settings"></i>
-                              </button</td>
-                            @else
-                                <td>{{$in->bus->number}}</td>
-                                <td>{{$in->driver->name}}</td>
-                                <td>    <input type="text" name="date" value="{{session()->get('today')}}" hidden>
-                                  <input type="text" name="rid" value="{{$item->rid}}" hidden>
-                                  <input type="text" name="starttime" value="{{$in->starttime}}" hidden>
-                                  <input type="text" name="endtime" value="{{$in->endtime}}" hidden>
+                            <td style="color: red;"bgcolor="#FF6347">Not Assigned</td>
+                            <td style="color: red;" bgcolor="#FF6347">Not Assigned</td>
                               
-                                  <button type="submit" rel="tooltip" class="btn btn-success btn-sm btn-icon">
-                                  <i class="tim-icons icon-settings"></i>
-                              </button</td>
+                            @else
+                            @if($in->bus==null)
+                            <td style="background-color: red;"bgcolor="#FF6347">Not Assigned</td>
+                            @else
+                            <td>{{$in->bus->number}}</td>
                             @endif
-                          </form>
+                              @if ($in->driver==null)
+                              <td style="background-color: red;" bgcolor="#FF6347">Not Assigned</td>
+                              @else
+                              <td>{{$in->driver->name}}</td>  
+                              @endif
+                              
+                                
+                                <input type="text" name="date" value="{{session()->get('today')}}" hidden>
+                                  <input type="text" name="rid" value="{{$item->rid}}" hidden>
+                                  <input type="text" name="starttime" value="{{$in->starttime}}" hidden>
+                                  <input type="text" name="endtime" value="{{$in->endtime}}" hidden>
+                                  <input type="text" name="shid" value="{{$in->shid}}" hidden>
+                                
+                            @endif
+                            <td>
+                            <button type="submit" rel="tooltip" class="btn btn-success btn-sm btn-icon">
+                              <i class="tim-icons icon-settings"></i>
+                          </button>
+                        </td>  
+                        </form>
                         </tr>
                       @endforeach
                   @endforeach
@@ -94,6 +108,12 @@
           <div class="card-body">
             
                 <table class="table">
+                  <form action="{{route('admin.copydata',session()->get('tomorrow'))}}">
+                    
+                  <tr>
+                    <td colspan="7" class="justify-content-center text-center"><button type="submit" class="btn btn-black">Copy Data From PRevious Record</button></td>
+                </tr>
+                  </form>
                   <tr><td>From</td>
                     <td>To</td>
                     <td>Starttime</td>
@@ -111,30 +131,30 @@
                             <form action="{{route('viewallocate')}}" method="get">
                           
                             @if(empty($in->busallocation))
-                            <td>Not Assigned</td>
-                            <td>Not Assigned</td>
-                            <td>   <input type="text" name="rid" value="{{$item->rid}}" hidden>
-                              <input type="text" name="date" value="{{session()->get('tomorrow')}}" hidden>
-                              <input type="text" name="starttime" value="{{$in->starttime}}" hidden>
-                              <input type="text" name="endtime" value="{{$in->endtime}}" hidden>
-                              
-                              <button type="submit" rel="tooltip" class="btn btn-success btn-sm btn-icon">
-                               
-                                
-                                <i class="tim-icons icon-settings"></i>
-                              </button></td>
+                            <td style="color:red;"  bgcolor="#FF6347" style="border-radius: 5px;">Not Assigned</td>
+                            <td   bgcolor="#FF6347">Not Assigned</td>
                             @else
-                                <td>{{$in->bus->number}}</td>
-                                <td>{{$in->driver->name}}</td>
-                                <td>   <input type="text" name="rid" value="{{$item->rid}}" hidden>
+                            @if($in->bus==null)
+                            <td bgcolor="#FF6347">Not Assigned</td>
+                            @else
+                            <td  >{{$in->bus->number}}</td>
+                            @endif
+                              @if ($in->driver==null)
+                              <td bgcolor="#FF6347">Not Assigned</td>
+                              @else
+                              <td>{{$in->driver->name}}</td>  
+                              @endif
+                                  <input type="text" name="rid" value="{{$item->rid}}" hidden>
                                   <input type="text" name="date" value="{{session()->get('tomorrow')}}" hidden>
                                   <input type="text" name="starttime" value="{{$in->starttime}}" hidden>
                                   <input type="text" name="endtime" value="{{$in->endtime}}" hidden>
-                              
-                                  <button type="submit" rel="tooltip" class="btn btn-success btn-sm btn-icon">
-                                    <i class="tim-icons icon-settings"></i>
-                              </button></td>
+                                  <input type="text" name="shid" value="{{$in->shid}}" hidden>
                             @endif
+                            <td>
+                              <button type="submit" rel="tooltip" class="btn btn-success btn-sm btn-icon">
+                                <i class="tim-icons icon-settings"></i>
+                            </button>
+                          </td> 
                             </form>
                         </tr>
                       @endforeach
