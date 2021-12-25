@@ -1,9 +1,9 @@
-Tour And Travel Booking And Management System USing Laravel
+Tour And Travel Booking And Management System Using Laravel(PHP framework)
 B.Sc. It 6th Sem Project In Department Of I.C.T. In Veer Narmad South Gujarat University GUided By MR. Tejash Shah
 
-This System has Two Side 1)Admin 2)User
+This System has Two type of user  1)Admin(for Agency) 2)User(for user looking for services)
 
-There Is Main Three Functionality Are Available In This Project
+There Is Main Three main services provided  In This Project
 1)Trip
 2)Tour
 3)Bushiring 
@@ -19,8 +19,10 @@ There Is Main Three Functionality Are Available In This Project
    ii) User Can Request For Bus For Their Occasion, IF Admin Approve Than The All Details Of Request Can Send To them Directly With Contact Details
 4) Admin Also Can Manage Driver And Buses, in Addition Admin Can Also Manage Availability Of Bus Or Driver.
 
-It IS Devloped With The Help OF Creative-Tim Laravel White Dashboard For Admin Side Design 
-And For User Side Design That Is Done With The Help Of Bootstrap Studio 
+-It IS Devloped With The Help OF Creative-Tim Laravel White Dashboard For Admin Side Design 
+-And For User Side Design That Is Done With The Help Of Bootstrap Studio 
+-For Seat Chart Plugin- J-query Seat Chart Plugin Is Used.
 
-For Seat Chart Plugin- J-query Seat Chart Plugin Is Used.
-
+Thanks
+Yogesh Patil 
+yogeshpatil.epizy.com :)
