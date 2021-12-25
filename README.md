@@ -20,9 +20,14 @@ There Is Main Three main services provided  In This Project
 4) Admin Also Can Manage Driver And Buses, in Addition Admin Can Also Manage Availability Of Bus Or Driver.
 
 -It IS Devloped With The Help OF Creative-Tim Laravel White Dashboard For Admin Side Design 
+
 -And For User Side Design That Is Done With The Help Of Bootstrap Studio 
+
 -For Seat Chart Plugin- J-query Seat Chart Plugin Is Used.
 
+
 Thanks
+
 Yogesh Patil 
+
 yogeshpatil.epizy.com :)
